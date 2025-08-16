@@ -4,5 +4,5 @@ const (
 	StorageRoot = "./storage"
 	EnvDev      = "dev"
 	EnvProd     = "prod"
-	URL         = "TEST + "
+	URL         = "https://test_med2/"
 )
