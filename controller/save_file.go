@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path"
 	"path/filepath"
 	"zip_archive/config"
 )
@@ -14,8 +15,8 @@ func (c *Controller) SaveFile(env, subDir, filename string, file io.Reader) (str
 		return "", fmt.Errorf("invalid environment: %s", env)
 	}
 
-	// Путь: ./storage/dev/subDir/
-	fullPath := filepath.Join("storage", env, subDir)
+	// Путь на диске: ./storage/dev/subDir/
+	fullPath := filepath.Join(config.StorageRoot, env, subDir)
 
 	// Создаём папку, если её нет
 	err := c.CreateFolder(fullPath)
@@ -38,6 +39,7 @@ func (c *Controller) SaveFile(env, subDir, filename string, file io.Reader) (str
 		return "", fmt.Errorf("failed to save file: %w", err)
 	}
 
-	// Возвращаем путь, куда файл сохранён
-	return config.URL + filepath.Join(env, subDir, filename), nil
+	// Формируем URL: используем только /, добавляем /storage
+	urlPath := path.Join(config.StorageRoot, env, subDir, filename)
+	return config.URL + urlPath, nil
 }
