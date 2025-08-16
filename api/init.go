@@ -21,6 +21,14 @@ func New(controller controller.Controller) *handlers {
 		controller: controller,
 	}
 }
+func RegisterLoginHandlers(routerGroup *gin.RouterGroup, controller controller.Controller) {
+	h := New(controller)
+	//--------------------------------------------------------------------------------login
+	{
+		login := routerGroup.Group("/login")
+		login.POST("", h.postLoginHandler)
+	}
+}
 
 func RegisterSaveFileHandlers(routerGroup *gin.RouterGroup, controller controller.Controller) {
 	h := New(controller)
