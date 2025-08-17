@@ -11,7 +11,7 @@ const (
 	StorageRoot = "./storage"
 	EnvDev      = "dev"
 	EnvProd     = "prod"
-	URL         = "https://test_med2/"
+	URL         = "http://80.93.61.158/"
 )
 const (
 	TokenExpiry  = 24 * time.Hour
